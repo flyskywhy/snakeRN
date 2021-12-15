@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "expo-blur": "~8.0.0",
+    "expo-font": "~8.0.0",
     "expo-gl": "~8.0.0",
     "expo-pixi": "1.2.0",
     "react": "16.13.1",
