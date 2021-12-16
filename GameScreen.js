@@ -23,7 +23,7 @@ export default function App({ onReady }) {
     game.current.board.onScore = score => setScore(score);
     game.current.board.onPlaying = isPlaying => setPlaying(isPlaying);
     game.current.board.setPaused(isPaused);
-    onReady()
+    onReady && onReady();
   }, []);
 
   React.useEffect(() => {
