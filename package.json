@@ -14,6 +14,7 @@
     "deploy:web": "expo build:web && netlify deploy --prod --dir web-build/"
   },
   "dependencies": {
+    "@flyskywhy/react-native-gcanvas": "2.3.7",
     "expo-blur": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-gl": "~8.4.0",
