@@ -54,6 +54,7 @@ export default function App({ onReady }) {
       >
         <GCanvasView
           onCanvasCreate={initCanvas}
+          isGestureResponsible={false}
           style={{ flex: 1, height: '100%', overflow: 'hidden' }}
         />
       </GestureView>
