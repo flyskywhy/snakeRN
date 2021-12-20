@@ -4,9 +4,11 @@
   "private": true,
   "description": "The goal of this project is to create a simple Snake game that could be used in any WebGL context.",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
+    "rn": "adb reverse tcp:8081 tcp:8081; node node_modules/react-native/local-cli/cli.js start",
+    "rn-fresh": "adb reverse tcp:8081 tcp:8081; watchman watch-del-all; rm -rf /tmp/react-*; rm -rf /tmp/npm-*; rm -rf /tmp/haste-*; rm -rf /tmp/metro-*; node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android --no-jetifier",
+    "fast-android": "./android/gradlew installDebug --offline -x lint -x lintVitalRelease -p ./android/",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "test": "jest",
     "lint": "eslint .",
     "deploy:web": "expo build:web && netlify deploy --prod --dir web-build/"
