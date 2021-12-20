@@ -1,4 +1,5 @@
 import Constants from 'expo-constants';
+import {GCanvasView} from '@flyskywhy/react-native-gcanvas';
 import { GLView } from 'expo-gl';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -17,6 +18,8 @@ export default function App({ onReady }) {
   const isPaused = appState !== 'active';
 
   let game = React.useRef(null);
+
+  const initCanvas = (canvas) => onContextCreate(canvas.getContext('webgl'));
 
   const onContextCreate = React.useMemo(() => context => {
     game.current = new Game(context);
@@ -49,9 +52,9 @@ export default function App({ onReady }) {
         onTap={onTap}
         onSwipe={onSwipe}
       >
-        <GLView
+        <GCanvasView
+          onCanvasCreate={initCanvas}
           style={{ flex: 1, height: '100%', overflow: 'hidden' }}
-          onContextCreate={onContextCreate}
         />
       </GestureView>
 

@@ -14,15 +14,15 @@
     "deploy:web": "expo build:web && netlify deploy --prod --dir web-build/"
   },
   "dependencies": {
-    "@flyskywhy/react-native-gcanvas": "2.3.7",
+    "@flyskywhy/react-native-gcanvas": "2.3.8",
     "expo-blur": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-gl": "~8.4.0",
-    "expo-pixi": "1.2.0",
     "pixi-filters": "^2.7.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-pixi": "2.0.0",
     "react-native-unimodules": "^0.12.0",
     "react-native-web": "~0.11.0"
   },

@@ -1,4 +1,4 @@
-import { PIXI } from 'expo-pixi';
+import { PIXI } from 'react-native-pixi';
 import { PixelRatio } from 'react-native';
 
 import Directions from './constants/Directions';
@@ -30,7 +30,7 @@ export default class Main {
       backgroundColor: Settings.backgroundColor 
     });
 
-    const size = Settings.tileSize * PixelRatio.get();
+    const size = Settings.tileSize;
     const width = Math.round(this.app.renderer.width / size);
     const height = Math.round(this.app.renderer.height / size);
     const board = new Board(
