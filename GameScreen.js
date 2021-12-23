@@ -69,7 +69,7 @@ export default function App({ onReady }) {
 function Paused() {
   return (
     <BlurView intensity={90} style={[StyleSheet.absoluteFill, { justifyContent: 'center', alignItems: 'center'}]}>
-      <Text style={{ fontFamily: 'kombat', textAlign: 'center', fontSize: 48, }}>Paused</Text>
+      <Text style={{ /*fontFamily: 'kombat',*/ textAlign: 'center', fontSize: 48, }}>Paused</Text>
     </BlurView>
   )
 }
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     top: 24,
     right: 24,
     opacity: 0.6,
-    fontFamily: 'kombat',
+    // fontFamily: 'kombat',
     fontSize: 48,
     textAlign: 'right',
     fontWeight: 'bold',

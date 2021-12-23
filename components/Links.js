@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     left: 24,
   },
   link: {
-    fontFamily: 'kombat',
+    // fontFamily: 'kombat',
     fontSize: 20,
     fontWeight: 'bold',
   },
