@@ -11,8 +11,9 @@ function _loopValue(v, min, max) {
   return v;
 }
 
-const Settings = {
+export const Settings = {
   initialSize: 6,
+  devicePixelRatio: 1, // for game, 1 is more better than PixelRatio.get() to code with physical pixels
   tileSize: 30,
   hasGrid: true,
   foodColor: 0xff0000,
@@ -25,12 +26,14 @@ const Settings = {
 
 export default class Main {
   constructor(context) {
-    this.app = new PIXI.Application({ 
-      context, 
-      backgroundColor: Settings.backgroundColor 
+    this.app = new PIXI.Application({
+      context,
+      devicePixelRatio: Settings.devicePixelRatio,
+      backgroundColor: Settings.backgroundColor,
     });
 
-    const size = Settings.tileSize;
+    const size =
+      Settings.tileSize * (PixelRatio.get() / Settings.devicePixelRatio);
     const width = Math.round(this.app.renderer.width / size);
     const height = Math.round(this.app.renderer.height / size);
     const board = new Board(

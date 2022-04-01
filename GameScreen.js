@@ -7,7 +7,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import GestureView from './components/GestureView';
 import Links from './components/Links';
 import Colors from './constants/Colors';
-import Game from './Game';
+import Game, {Settings} from './Game';
 import useAppState from './hooks/useAppState';
 import { BlurView } from 'expo-blur';
 
@@ -55,6 +55,7 @@ export default function App({ onReady }) {
         <GCanvasView
           onCanvasCreate={initCanvas}
           isGestureResponsible={false}
+          devicePixelRatio={Settings.devicePixelRatio}
           style={{ flex: 1, height: '100%', overflow: 'hidden' }}
         />
       </GestureView>
