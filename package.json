@@ -1,8 +1,8 @@
 {
-  "name": "snake",
-  "version": "2.0.0",
+  "name": "snakern",
+  "version": "3.0.0",
   "private": true,
-  "description": "The goal of this project is to create a simple Snake game that could be used in any WebGL context.",
+  "description": "react-native-pixi Snake game made in React Native with @flyskywhy/react-native-gcanvas instead of expo-gl",
   "scripts": {
     "rn": "adb reverse tcp:8081 tcp:8081; node node_modules/react-native/local-cli/cli.js start",
     "rn-fresh": "adb reverse tcp:8081 tcp:8081; watchman watch-del-all; rm -rf /tmp/react-*; rm -rf /tmp/npm-*; rm -rf /tmp/haste-*; rm -rf /tmp/metro-*; node node_modules/react-native/local-cli/cli.js start --reset-cache",
@@ -18,12 +18,11 @@
     "expo-blur": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-gl": "~8.4.0",
-    "pixi-filters": "^2.7.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "0.63.2",
     "react-native-pixi": "2.0.2",
-    "react-native-unimodules": "^0.12.0",
+    "react-native-unimodules": "0.12.0",
     "react-native-web": "~0.11.0"
   },
   "devDependencies": {
@@ -37,6 +36,18 @@
     "prettier": "2.1.1",
     "react-test-renderer": "16.13.1"
   },
+  "keywords": [
+    "android",
+    "app",
+    "game",
+    "ios",
+    "native",
+    "opengl",
+    "pixi",
+    "react",
+    "react-native",
+    "webgl"
+  ],
   "jest": {
     "preset": "react-native"
   }
