@@ -1,29 +1,26 @@
-
-
-import React, { useEffect, useState } from 'react'
-import { AppState, AppStateStatus } from 'react-native'
+import React, {useEffect, useState} from 'react';
+import {AppState, AppStateStatus} from 'react-native';
 
 export default function useAppState() {
-  const currentState = AppState.currentState
-  const [appState, setAppState] = useState(currentState)
+  const currentState = AppState.currentState;
+  const [appState, setAppState] = useState(currentState);
 
   function onBlur() {
-    setAppState('background')
+    setAppState('background');
   }
   function onFocus() {
-    setAppState('active')
+    setAppState('active');
   }
 
   useEffect(() => {
     window.addEventListener('blur', onBlur);
     window.addEventListener('focus', onFocus);
-    
+
     return () => {
-        window.removeEventListener('blur', onBlur);
-        window.removeEventListener('focus', onFocus);
-    }
-  })
+      window.removeEventListener('blur', onBlur);
+      window.removeEventListener('focus', onFocus);
+    };
+  });
 
-  return appState
+  return appState;
 }
-

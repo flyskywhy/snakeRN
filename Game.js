@@ -1,12 +1,15 @@
-import { PIXI } from 'react-native-pixi';
-import { PixelRatio } from 'react-native';
+import {PIXI} from 'react-native-pixi';
+import {PixelRatio} from 'react-native';
 
 import Directions from './constants/Directions';
 
 function _loopValue(v, min, max) {
   if (Settings.areWallsLooping) {
-    if (v < min) return max;
-    else if (v > max) return min;
+    if (v < min) {
+      return max;
+    } else if (v > max) {
+      return min;
+    }
   }
   return v;
 }
@@ -18,7 +21,7 @@ export const Settings = {
   hasGrid: true,
   foodColor: 0xff0000,
   snakeColor: 0x6660e7,
-  backgroundColor: 0x7ED321,
+  backgroundColor: 0x7ed321,
   timeInterval: 90,
   areWallsLooping: true,
   initialFood: 3,
@@ -60,7 +63,7 @@ class Position {
       Math.floor(this.col * Math.random()),
     );
   };
-  add = pos => {
+  add = (pos) => {
     this.row += pos.row;
     this.col += pos.col;
     return this;
@@ -96,7 +99,7 @@ class Board extends PIXI.Container {
     }
     this.isRunning = !isPaused;
     this.onPlaying(this.isRunning);
-  }
+  };
 
   _generateStartingPositions = () => {
     this.snakeLength = Settings.initialSize;
@@ -123,7 +126,9 @@ class Board extends PIXI.Container {
   _generateField = () => {
     let index = 0;
     for (let col = 0; col < this._boardSize.col; col++) {
-      if (!this.matrix[col]) this.matrix[col] = [];
+      if (!this.matrix[col]) {
+        this.matrix[col] = [];
+      }
       for (let row = 0; row < this._boardSize.row; row++) {
         if (this.matrix[col][row]) {
           this.matrix[col][row].reset();
@@ -176,7 +181,7 @@ class Board extends PIXI.Container {
     return this.matrix[this.tail.col][this.tail.row];
   }
 
-  _getVelocityForDirection = dir => {
+  _getVelocityForDirection = (dir) => {
     let position = new Position();
     if (dir === Directions.UP) {
       position.row--;
@@ -190,17 +195,19 @@ class Board extends PIXI.Container {
     return position;
   };
 
-  loopPosition = p => {
+  loopPosition = (p) => {
     p.row = _loopValue(p.row, 0, this._boardSize.row - 1);
     p.col = _loopValue(p.col, 0, this._boardSize.col - 1);
     return p;
   };
 
-  tick = interval => {
+  tick = (interval) => {
     clearInterval(this.secondsInterval);
 
     this.secondsInterval = setInterval(() => {
-      if (!this.isRunning) return;
+      if (!this.isRunning) {
+        return;
+      }
       const n = this.foodPositions.indexOf(this.currentHead.parentIndex);
       this.foodPositions.splice(n, 1);
 
@@ -241,7 +248,7 @@ class Board extends PIXI.Container {
     }
   };
 
-  onSwipe = dir => {
+  onSwipe = (dir) => {
     if (this.isRunning) {
       if (dir && this.headDirection !== otherDir[dir]) {
         this.isChangingDirection = true;
@@ -283,7 +290,7 @@ class Square extends PIXI.Graphics {
     this.drawRect(0, 0, this._size, this._size);
   };
 
-  constructor({ color, size }) {
+  constructor({color, size}) {
     super();
     this._size = size;
     this._color = color;
@@ -302,9 +309,13 @@ class Tile extends Square {
   }
 
   _updateColor = () => {
-    if (this._isFood) this.color = Settings.foodColor;
-    else if (this._isSnake) this.color = Settings.snakeColor;
-    else this.color = Settings.backgroundColor;
+    if (this._isFood) {
+      this.color = Settings.foodColor;
+    } else if (this._isSnake) {
+      this.color = Settings.snakeColor;
+    } else {
+      this.color = Settings.backgroundColor;
+    }
   };
 
   get isFood() {
@@ -324,7 +335,7 @@ class Tile extends Square {
     this._updateColor();
   }
   constructor(size, x, y, isSnake, parentIndex) {
-    super({ size });
+    super({size});
     this.x = size * x;
     this.y = size * y;
 

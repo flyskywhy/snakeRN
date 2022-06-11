@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { PanResponder, View, StyleSheet } from 'react-native';
-import { findDOMNode } from 'react-dom';
-import Directions from '../constants/Directions'
+import React, {Component} from 'react';
+import {PanResponder, View, StyleSheet} from 'react-native';
+import {findDOMNode} from 'react-dom';
+import Directions from '../constants/Directions';
 
-const getElement = component => {
+const getElement = (component) => {
   try {
     return findDOMNode(component);
   } catch (e) {
@@ -46,7 +46,7 @@ function isValidSwipe(
   );
 }
 
-const freezeBody = e => {
+const freezeBody = (e) => {
   e.preventDefault();
 };
 class GestureView extends Component {
@@ -66,7 +66,7 @@ class GestureView extends Component {
     window.addEventListener('keydown', this.onKeyDown, false);
     window.addEventListener('keyup', this.onKeyUp, false);
   }
-  
+
   componentWillUnmount() {
     if (this.view) {
       this.view.removeEventListener('touchstart', freezeBody, false);
@@ -80,7 +80,7 @@ class GestureView extends Component {
     this.swipeConfig = Object.assign(swipeConfig, props.config);
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     const direction = keyMap[e.code];
     // For snake on keyboard we want to move when the key is pressed down
     if (direction && this.props.onSwipe) {
@@ -91,7 +91,7 @@ class GestureView extends Component {
     // }
   };
 
-  onKeyUp = e => {
+  onKeyUp = (e) => {
     const direction = keyMap[e.code];
     if (direction) {
       // this.props.onSwipe(direction);
@@ -103,7 +103,7 @@ class GestureView extends Component {
     return evt.nativeEvent.touches.length === 1;
   };
 
-  _gestureIsClick = gestureState => {
+  _gestureIsClick = (gestureState) => {
     return Math.abs(gestureState.dx) < 5 && Math.abs(gestureState.dy) < 5;
   };
 
@@ -122,7 +122,7 @@ class GestureView extends Component {
       onSwipeRight,
       onTap,
     } = this.props;
-    const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = swipeDirections;
+    const {SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN} = swipeDirections;
     onSwipe && onSwipe(swipeDirection, gestureState);
     switch (swipeDirection) {
       case SWIPE_LEFT:
@@ -143,9 +143,9 @@ class GestureView extends Component {
     }
   };
 
-  _getSwipeDirection = gestureState => {
-    const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = swipeDirections;
-    const { dx, dy } = gestureState;
+  _getSwipeDirection = (gestureState) => {
+    const {SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN} = swipeDirections;
+    const {dx, dy} = gestureState;
     if (this._isValidHorizontalSwipe(gestureState)) {
       return dx > 0 ? SWIPE_RIGHT : SWIPE_LEFT;
     } else if (this._isValidVerticalSwipe(gestureState)) {
@@ -154,26 +154,26 @@ class GestureView extends Component {
     return null;
   };
 
-  _isValidHorizontalSwipe = gestureState => {
-    const { vx, dy } = gestureState;
-    const { velocityThreshold, directionalOffsetThreshold } = this.swipeConfig;
+  _isValidHorizontalSwipe = (gestureState) => {
+    const {vx, dy} = gestureState;
+    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
     return isValidSwipe(vx, velocityThreshold, dy, directionalOffsetThreshold);
   };
 
-  _isValidVerticalSwipe = gestureState => {
-    const { vy, dx } = gestureState;
-    const { velocityThreshold, directionalOffsetThreshold } = this.swipeConfig;
+  _isValidVerticalSwipe = (gestureState) => {
+    const {vy, dx} = gestureState;
+    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
     return isValidSwipe(vy, velocityThreshold, dx, directionalOffsetThreshold);
   };
 
   render() {
-    const { style = {}, ...props } = this.props;
+    const {style = {}, ...props} = this.props;
 
     return (
       <View
-        style={[{ cursor: 'pointer' }, style]}
+        style={[{cursor: 'pointer'}, style]}
         tabIndex="0"
-        ref={view => {
+        ref={(view) => {
           const nextView = getElement(view);
           if (nextView && nextView.addEventListener) {
             nextView.addEventListener('touchstart', freezeBody, false);

@@ -1,27 +1,25 @@
-import { AppLoading, SplashScreen, Updates } from 'expo';
-import { Asset } from 'expo-asset';
+import {AppLoading, SplashScreen, Updates} from 'expo';
+import {Asset} from 'expo-asset';
 import Constants from 'expo-constants';
 import React from 'react';
-import { Animated, Button, StyleSheet, Text, View, Platform } from 'react-native';
+import {Animated, Button, StyleSheet, Text, View, Platform} from 'react-native';
 import GameScreen from './GameScreen';
 import * as Font from 'expo-font';
 
 SplashScreen.preventAutoHide(); // Instruct SplashScreen not to hide yet
 
 export default function App() {
-  return (
-    <AnimatedAppLoader image={require('./assets/loading.png')} />
-  );
+  return <AnimatedAppLoader image={require('./assets/loading.png')} />;
 }
 
-function AnimatedAppLoader({ image }) {
+function AnimatedAppLoader({image}) {
   const [isSplashReady, setSplashReady] = React.useState(false);
 
   const startAsync = React.useMemo(
     () => () => {
       return Asset.fromModule(image).downloadAsync();
     },
-    [image]
+    [image],
   );
 
   const onFinish = React.useMemo(() => setSplashReady(true), []);
@@ -36,15 +34,15 @@ function AnimatedAppLoader({ image }) {
     );
   }
 
-  return <AnimatedSplashScreen image={image} />
+  return <AnimatedSplashScreen image={image} />;
 }
 
-function AnimatedSplashScreen({ image }) {
+function AnimatedSplashScreen({image}) {
   const animation = React.useMemo(() => new Animated.Value(1), []);
   const [isAppReady, setAppReady] = React.useState(false);
   const [isGameReady, setGameReady] = React.useState(false);
   const [isSplashAnimationComplete, setAnimationComplete] = React.useState(
-    false
+    false,
   );
 
   React.useEffect(() => {
@@ -52,7 +50,7 @@ function AnimatedSplashScreen({ image }) {
       Animated.timing(animation, {
         toValue: 0,
         duration: 200,
-        useNativeDriver: Platform.select({ web: false, default: true }),
+        useNativeDriver: Platform.select({web: false, default: true}),
       }).start(() => setAnimationComplete(true));
     }
   }, [isGameReady]);
@@ -62,18 +60,18 @@ function AnimatedSplashScreen({ image }) {
     try {
       // Load stuff
       await Promise.all([
-        Font.loadAsync('kombat', require('./assets/kombat.ttf'))
+        Font.loadAsync('kombat', require('./assets/kombat.ttf')),
       ]);
     } catch (e) {
       // handle errors
     } finally {
-        setAppReady(true);
+      setAppReady(true);
     }
   });
 
   return (
-    <View style={{ flex: 1 }}>
-        {isAppReady && <GameScreen onReady={() => setGameReady(true)} />}
+    <View style={{flex: 1}}>
+      {isAppReady && <GameScreen onReady={() => setGameReady(true)} />}
       {!isSplashAnimationComplete && (
         <Animated.View
           pointerEvents="none"

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { PanResponder, StyleSheet, View } from 'react-native';
-import Directions from '../constants/Directions'
+import React, {Component} from 'react';
+import {PanResponder, StyleSheet, View} from 'react-native';
+import Directions from '../constants/Directions';
 
 export const swipeDirections = {
   SWIPE_UP: Directions.UP,
@@ -48,7 +48,7 @@ class GestureView extends Component {
     return evt.nativeEvent.touches.length === 1;
   };
 
-  _gestureIsClick = gestureState => {
+  _gestureIsClick = (gestureState) => {
     return Math.abs(gestureState.dx) < 5 && Math.abs(gestureState.dy) < 5;
   };
 
@@ -67,7 +67,7 @@ class GestureView extends Component {
       onSwipeRight,
       onTap,
     } = this.props;
-    const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = swipeDirections;
+    const {SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN} = swipeDirections;
     onSwipe && onSwipe(swipeDirection, gestureState);
     switch (swipeDirection) {
       case SWIPE_LEFT:
@@ -88,9 +88,9 @@ class GestureView extends Component {
     }
   };
 
-  _getSwipeDirection = gestureState => {
-    const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = swipeDirections;
-    const { dx, dy } = gestureState;
+  _getSwipeDirection = (gestureState) => {
+    const {SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN} = swipeDirections;
+    const {dx, dy} = gestureState;
     if (this._isValidHorizontalSwipe(gestureState)) {
       return dx > 0 ? SWIPE_RIGHT : SWIPE_LEFT;
     } else if (this._isValidVerticalSwipe(gestureState)) {
@@ -99,26 +99,20 @@ class GestureView extends Component {
     return null;
   };
 
-  _isValidHorizontalSwipe = gestureState => {
-    const { vx, dy } = gestureState;
-    const { velocityThreshold, directionalOffsetThreshold } = this.swipeConfig;
+  _isValidHorizontalSwipe = (gestureState) => {
+    const {vx, dy} = gestureState;
+    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
     return isValidSwipe(vx, velocityThreshold, dy, directionalOffsetThreshold);
   };
 
-  _isValidVerticalSwipe = gestureState => {
-    const { vy, dx } = gestureState;
-    const { velocityThreshold, directionalOffsetThreshold } = this.swipeConfig;
+  _isValidVerticalSwipe = (gestureState) => {
+    const {vy, dx} = gestureState;
+    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
     return isValidSwipe(vy, velocityThreshold, dx, directionalOffsetThreshold);
   };
 
   render() {
-    return (
-      <View
-        
-        {...this.props}
-        {...this._panResponder.panHandlers}
-      />
-    );
+    return <View {...this.props} {...this._panResponder.panHandlers} />;
   }
 }
 

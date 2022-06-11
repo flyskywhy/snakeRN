@@ -1,17 +1,17 @@
 import Constants from 'expo-constants';
 import {GCanvasView} from '@flyskywhy/react-native-gcanvas';
-import { GLView } from 'expo-gl';
+import {GLView} from 'expo-gl';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 import GestureView from './components/GestureView';
 import Links from './components/Links';
 import Colors from './constants/Colors';
 import Game, {Settings} from './Game';
 import useAppState from './hooks/useAppState';
-import { BlurView } from 'expo-blur';
+import {BlurView} from 'expo-blur';
 
-export default function App({ onReady }) {
+export default function App({onReady}) {
   const [score, setScore] = React.useState(0);
   const [isPlaying, setPlaying] = React.useState(false);
   const appState = useAppState();
@@ -21,42 +21,47 @@ export default function App({ onReady }) {
 
   const initCanvas = (canvas) => onContextCreate(canvas.getContext('webgl'));
 
-  const onContextCreate = React.useMemo(() => context => {
-    game.current = new Game(context);
-    game.current.board.onScore = score => setScore(score);
-    game.current.board.onPlaying = isPlaying => setPlaying(isPlaying);
-    game.current.board.setPaused(isPaused);
-    onReady && onReady();
-  }, []);
+  const onContextCreate = React.useMemo(
+    () => (context) => {
+      game.current = new Game(context);
+      game.current.board.onScore = (score) => setScore(score);
+      game.current.board.onPlaying = (isPlaying) => setPlaying(isPlaying);
+      game.current.board.setPaused(isPaused);
+      onReady && onReady();
+    },
+    [],
+  );
 
   React.useEffect(() => {
-    if (game.current) game.current.board.setPaused(isPaused)
-  }, [game && game.current, appState])
+    if (game.current) game.current.board.setPaused(isPaused);
+  }, [game && game.current, appState]);
 
-  const onTap = React.useMemo(() => () => {
-    if (game.current) {
-      game.current.board.onTap();
-    }
-  }, [game && game.current]);
+  const onTap = React.useMemo(
+    () => () => {
+      if (game.current) {
+        game.current.board.onTap();
+      }
+    },
+    [game && game.current],
+  );
 
-  const onSwipe = React.useMemo(() => direction => {
-    if (game.current) {
-      game.current.board.onSwipe(direction);
-    }
-  }, [game && game.current]);
+  const onSwipe = React.useMemo(
+    () => (direction) => {
+      if (game.current) {
+        game.current.board.onSwipe(direction);
+      }
+    },
+    [game && game.current],
+  );
 
   return (
     <View style={styles.container}>
-      <GestureView
-        style={styles.gestureView}
-        onTap={onTap}
-        onSwipe={onSwipe}
-      >
+      <GestureView style={styles.gestureView} onTap={onTap} onSwipe={onSwipe}>
         <GCanvasView
           onCanvasCreate={initCanvas}
           isGestureResponsible={false}
           devicePixelRatio={Settings.devicePixelRatio}
-          style={{ flex: 1, height: '100%', overflow: 'hidden' }}
+          style={{flex: 1, height: '100%', overflow: 'hidden'}}
         />
       </GestureView>
 
@@ -70,10 +75,18 @@ export default function App({ onReady }) {
 
 function Paused() {
   return (
-    <BlurView intensity={90} style={[StyleSheet.absoluteFill, { justifyContent: 'center', alignItems: 'center'}]}>
-      <Text style={{ /*fontFamily: 'kombat',*/ textAlign: 'center', fontSize: 48, }}>Paused</Text>
+    <BlurView
+      intensity={90}
+      style={[
+        StyleSheet.absoluteFill,
+        {justifyContent: 'center', alignItems: 'center'},
+      ]}>
+      <Text
+        style={{/*fontFamily: 'kombat',*/ textAlign: 'center', fontSize: 48}}>
+        Paused
+      </Text>
     </BlurView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
