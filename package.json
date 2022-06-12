@@ -12,6 +12,7 @@
     "web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "web-fresh": "rm -fr node_modules/.cache/*; cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "build-web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired build",
+    "build-web-snakeRN": "cross-env PUBLIC_URL=/snakeRN PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired build",
     "test": "jest",
     "test-web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired test --env=jsdom",
     "lint": "eslint .",

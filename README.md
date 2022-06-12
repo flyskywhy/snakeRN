@@ -12,6 +12,8 @@ npm install --legacy-peer-deps
 
 `npm run build-web` to generate files in `build/` for production to deploy to `https://foo.bar.com/` , and can use `npx http-server@13.0.2 build` to simply test it at [http://127.0.0.1:8080](http://127.0.0.1:8080) in web browser.
 
+`npm run build-web-snakeRN` to generate files in `build/` for production to deploy to `https://foo.bar.com/snakeRN/`, e.g. [https://flyskywhy.github.io/snakeRN/](https://flyskywhy.github.io/snakeRN/) .
+
 ## Try it now
 
 Run the project in Snack to try it now: https://retrosnake.netlify.com/
