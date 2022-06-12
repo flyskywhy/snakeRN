@@ -33,6 +33,16 @@ export default function App({onReady}) {
       // so have to assign again, unless <canvas width=SOME_NUMBER/> in render()
       thisCanvas.width = thisCanvas.clientWidth;
       thisCanvas.height = thisCanvas.clientHeight;
+
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.target.id === 'canvasPixi') {
+            let {width, height} = entry.contentRect;
+            onCanvasResize({width, height, canvas: entry.target});
+          }
+        }
+      });
+      resizeObserver.observe(document.getElementById('canvasPixi'));
     }
     onContextCreate(thisCanvas.getContext('webgl', {stencil: true}));
   };
@@ -47,6 +57,11 @@ export default function App({onReady}) {
     },
     [],
   );
+
+  const onCanvasResize = ({width, height, canvas}) => {
+    canvas.width = width;
+    canvas.height = height;
+  };
 
   React.useEffect(() => {
     if (game.current) game.current.board.setPaused(isPaused);
@@ -75,6 +90,7 @@ export default function App({onReady}) {
       <GestureView style={styles.gestureView} onTap={onTap} onSwipe={onSwipe}>
         {Platform.OS === 'web' ? (
           <canvas
+            id={'canvasPixi'}
             ref={initCanvas}
             style={{flex: 1, height: '100%', overflow: 'hidden'}}
           />
