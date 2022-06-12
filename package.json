@@ -1,6 +1,6 @@
 {
   "name": "snakern",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "description": "react-native-pixi Snake game made in React Native with @flyskywhy/react-native-gcanvas instead of expo-gl",
   "scripts": {
@@ -8,6 +8,8 @@
     "rn-fresh": "adb reverse tcp:8081 tcp:8081; watchman watch-del-all; rm -rf /tmp/react-*; rm -rf /tmp/npm-*; rm -rf /tmp/haste-*; rm -rf /tmp/metro-*; node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "android": "node node_modules/react-native/local-cli/cli.js run-android --no-jetifier",
     "fast-android": "cross-env ./android/gradlew installDebug --offline -x lint -x lintVitalRelease -p ./android/",
+    "build-android": "cross-env ./android/gradlew assembleRelease --offline -x lint -x lintVitalRelease -p ./android/",
+    "bundle-android": "cross-env ./android/gradlew bundleRelease --offline -x lint -x lintVitalRelease -p ./android/",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "web-fresh": "rm -fr node_modules/.cache/*; cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
@@ -15,8 +17,7 @@
     "build-web-snakeRN": "cross-env PUBLIC_URL=/snakeRN PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired build",
     "test": "jest",
     "test-web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired test --env=jsdom",
-    "lint": "eslint .",
-    "deploy:web": "expo build:web && netlify deploy --prod --dir web-build/"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@flyskywhy/react-native-gcanvas": "2.3.24",
@@ -29,7 +30,7 @@
     "react-native": "0.63.2",
     "react-native-pixi": "2.0.2",
     "react-native-unimodules": "0.12.0",
-    "react-native-web": "^0.17.5"
+    "react-native-web": "0.17.5"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.1",
@@ -53,6 +54,7 @@
     "pixi",
     "react",
     "react-native",
+    "web",
     "webgl"
   ],
   "jest": {
