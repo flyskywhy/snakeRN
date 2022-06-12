@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import {GCanvasView} from '@flyskywhy/react-native-gcanvas';
 import {GLView} from 'expo-gl';
 import * as React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import GestureView from './components/GestureView';
 import Links from './components/Links';
@@ -10,6 +10,8 @@ import Colors from './constants/Colors';
 import Game, {Settings} from './Game';
 import useAppState from './hooks/useAppState';
 import {BlurView} from 'expo-blur';
+
+let thisCanvas = null;
 
 export default function App({onReady}) {
   const [score, setScore] = React.useState(0);
@@ -19,7 +21,21 @@ export default function App({onReady}) {
 
   let game = React.useRef(null);
 
-  const initCanvas = (canvas) => onContextCreate(canvas.getContext('webgl'));
+  const initCanvas = (canvas) => {
+    if (thisCanvas) {
+      return;
+    }
+
+    thisCanvas = canvas;
+    if (Platform.OS === 'web') {
+      // canvas.width not equal canvas.clientWidth but "Defaults to 300" ref
+      // to https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas,
+      // so have to assign again, unless <canvas width=SOME_NUMBER/> in render()
+      thisCanvas.width = thisCanvas.clientWidth;
+      thisCanvas.height = thisCanvas.clientHeight;
+    }
+    onContextCreate(thisCanvas.getContext('webgl'));
+  };
 
   const onContextCreate = React.useMemo(
     () => (context) => {
@@ -57,12 +73,19 @@ export default function App({onReady}) {
   return (
     <View style={styles.container}>
       <GestureView style={styles.gestureView} onTap={onTap} onSwipe={onSwipe}>
-        <GCanvasView
-          onCanvasCreate={initCanvas}
-          isGestureResponsible={false}
-          devicePixelRatio={Settings.devicePixelRatio}
-          style={{flex: 1, height: '100%', overflow: 'hidden'}}
-        />
+        {Platform.OS === 'web' ? (
+          <canvas
+            ref={initCanvas}
+            style={{flex: 1, height: '100%', overflow: 'hidden'}}
+          />
+        ) : (
+          <GCanvasView
+            onCanvasCreate={initCanvas}
+            isGestureResponsible={false}
+            devicePixelRatio={Settings.devicePixelRatio}
+            style={{flex: 1, height: '100%', overflow: 'hidden'}}
+          />
+        )}
       </GestureView>
 
       {isPaused && <Paused />}
