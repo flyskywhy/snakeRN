@@ -34,7 +34,7 @@ export default function App({onReady}) {
       thisCanvas.width = thisCanvas.clientWidth;
       thisCanvas.height = thisCanvas.clientHeight;
     }
-    onContextCreate(thisCanvas.getContext('webgl'));
+    onContextCreate(thisCanvas.getContext('webgl', {stencil: true}));
   };
 
   const onContextCreate = React.useMemo(
