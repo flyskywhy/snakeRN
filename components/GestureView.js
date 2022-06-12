@@ -52,7 +52,9 @@ const freezeBody = (e) => {
 class GestureView extends Component {
   constructor(props, context) {
     super(props, context);
-    this.swipeConfig = Object.assign(swipeConfig, props.config);
+    this.state = {
+      swipeConfig: Object.assign(swipeConfig, props.config),
+    };
     this._panResponder = PanResponder.create({
       onResponderGrant: props.onResponderGrant,
       onStartShouldSetPanResponder: this._handleShouldSetPanResponder,
@@ -76,8 +78,10 @@ class GestureView extends Component {
     window.removeEventListener('keyup', this.onKeyUp);
   }
 
-  componentWillReceiveProps(props) {
-    this.swipeConfig = Object.assign(swipeConfig, props.config);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      swipeConfig: Object.assign(swipeConfig, nextProps.config),
+    };
   }
 
   onKeyDown = (e) => {
@@ -156,13 +160,19 @@ class GestureView extends Component {
 
   _isValidHorizontalSwipe = (gestureState) => {
     const {vx, dy} = gestureState;
-    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
+    const {
+      velocityThreshold,
+      directionalOffsetThreshold,
+    } = this.state.swipeConfig;
     return isValidSwipe(vx, velocityThreshold, dy, directionalOffsetThreshold);
   };
 
   _isValidVerticalSwipe = (gestureState) => {
     const {vy, dx} = gestureState;
-    const {velocityThreshold, directionalOffsetThreshold} = this.swipeConfig;
+    const {
+      velocityThreshold,
+      directionalOffsetThreshold,
+    } = this.state.swipeConfig;
     return isValidSwipe(vy, velocityThreshold, dx, directionalOffsetThreshold);
   };
 
