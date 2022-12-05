@@ -21,7 +21,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@flyskywhy/react-native-gcanvas": "2.3.24",
+    "@flyskywhy/react-native-gcanvas": "2.3.35",
     "expo-blur": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-gl": "~8.4.0",
