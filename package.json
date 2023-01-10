@@ -6,10 +6,12 @@
   "scripts": {
     "rn": "adb reverse tcp:8081 tcp:8081; node node_modules/react-native/local-cli/cli.js start",
     "rn-fresh": "adb reverse tcp:8081 tcp:8081; watchman watch-del-all; rm -rf /tmp/react-*; rm -rf /tmp/npm-*; rm -rf /tmp/haste-*; rm -rf /tmp/metro-*; node node_modules/react-native/local-cli/cli.js start --reset-cache",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android --no-jetifier",
+    "android": "cross-env node node_modules/react-native/local-cli/cli.js run-android --no-jetifier",
+    "android-fresh": "cross-env ./android/gradlew installDebug --rerun-tasks -x lint -x lintVitalRelease -p ./android/",
     "fast-android": "cross-env ./android/gradlew installDebug --offline -x lint -x lintVitalRelease -p ./android/",
     "fast-android-fresh": "cross-env ./android/gradlew installDebug --rerun-tasks --offline -x lint -x lintVitalRelease -p ./android/",
     "build-android": "cross-env ./android/gradlew assembleRelease --offline -x lint -x lintVitalRelease -p ./android/",
+    "build-android-fresh": "cross-env ./android/gradlew assembleRelease --rerun-tasks --offline -x lint -x lintVitalRelease -p ./android/",
     "bundle-android": "cross-env ./android/gradlew bundleRelease --offline -x lint -x lintVitalRelease -p ./android/",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
