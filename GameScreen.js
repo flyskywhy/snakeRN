@@ -43,12 +43,12 @@ export default function App({onReady}) {
       });
       resizeObserver.observe(document.getElementById('canvasPixi'));
     }
-    onContextCreate(thisCanvas.getContext('webgl', {stencil: true}));
+    initGame(canvas);
   };
 
-  const onContextCreate = React.useMemo(
-    () => (context) => {
-      game.current = new Game(context);
+  const initGame = React.useMemo(
+    () => (canvas) => {
+      game.current = new Game(canvas);
       game.current.board.onScore = (score) => setScore(score);
       game.current.board.onPlaying = (isPlaying) => setPlaying(isPlaying);
       game.current.board.setPaused(isPaused);
@@ -98,6 +98,7 @@ export default function App({onReady}) {
             onCanvasCreate={initCanvas}
             isGestureResponsible={false}
             devicePixelRatio={Settings.devicePixelRatio}
+            offscreenCanvas={true}
             style={{flex: 1, height: '100%', overflow: 'hidden'}}
           />
         )}

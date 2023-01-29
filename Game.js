@@ -17,6 +17,7 @@ function _loopValue(v, min, max) {
 export const Settings = {
   initialSize: 6,
   devicePixelRatio: 1, // for game, 1 is more better than PixelRatio.get() to code with physical pixels
+  forceCanvas: true, // PIXI default getContext 'webgl', or you can let it getContext '2d' instead against `forceCanvas = true`
   tileSize: 30,
   hasGrid: true,
   foodColor: 0xff0000,
@@ -28,9 +29,10 @@ export const Settings = {
 };
 
 export default class Main {
-  constructor(context) {
+  constructor(canvas) {
     this.app = new PIXI.Application({
-      context,
+      view: canvas,
+      forceCanvas: Settings.forceCanvas,
       devicePixelRatio: Settings.devicePixelRatio,
       backgroundColor: Settings.backgroundColor,
     });
