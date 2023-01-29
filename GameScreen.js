@@ -1,6 +1,5 @@
 import Constants from 'expo-constants';
 import {GCanvasView} from '@flyskywhy/react-native-gcanvas';
-import {GLView} from 'expo-gl';
 import * as React from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 

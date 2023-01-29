@@ -26,7 +26,6 @@
     "@flyskywhy/react-native-gcanvas": "5.1.1",
     "expo-blur": "~8.0.0",
     "expo-font": "~8.0.0",
-    "expo-gl": "~8.4.0",
     "modal-enhanced-react-native-web": "^0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
