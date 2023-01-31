@@ -1,6 +1,8 @@
 # 🐍 snakeRN 🎮
 
-[react-native-pixi](https://github.com/flyskywhy/react-native-pixi) Snake game made in React Native with `@flyskywhy/react-native-gcanvas` instead of `expo-gl` 👾 The goal of this project is to create a simple Snake clone that could be used in any WebGL context. The primary target being native iPhone and Android apps.
+PIXI Snake game made in React Native with `@flyskywhy/react-native-gcanvas` instead of `expo-gl` 👾 The goal of this project is to create a simple Snake clone that could be used in any 'webgl' or '2d' context. The primary target being native iPhone and Android apps.
+
+For now, SnakeRN is based on [react-native-pixi@2](https://github.com/flyskywhy/react-native-pixi/tree/2.1.2) and `pixi.js@4.8.9`, even actually SnakeRN can be based on `pixi.js` `@4`, `@5`, `@6` or `@7` directly without `react-native-pixi` as described in [react-native-pixi@3](https://github.com/flyskywhy/react-native-pixi), I just leave it to be a final example of `react-native-pixi@2`.
 
 <img src="https://raw.githubusercontent.com/flyskywhy/snakeRN/master/assets/snakeRN.gif" width="480">
 
